@@ -1,3 +1,5 @@
-R100    pythonfilerenamed.py    aaaaaaa.py
-A       pythonfile2.py
-D       abc.py
+R100 | pythonfilerenamed.py    aaaaaaa.py
+A | pythonfile2.py |
+D | abc.py |
+A | New folder/pythonFileInFolder.py |
+M | pythonfile2.py |

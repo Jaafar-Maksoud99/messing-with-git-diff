@@ -39,11 +39,11 @@ notebooks_to_delete = []
 with open(filepath, 'r') as file:
     for line in file:
         if line[:1] == "R":
-            notebooks_to_rename.append(line.split()[1:])
+            notebooks_to_rename.append(line.split("|")[1:])
         elif line[:1] == "D":
-            notebooks_to_delete.append(line.split()[1])
+            notebooks_to_delete.append(line.split("|")[1])
         else:
-            notebooks_to_deploy.append(line.split()[1])
+            notebooks_to_deploy.append(line.split("|")[1])
 print(notebooks_to_deploy)
 print(notebooks_to_rename)
 print(notebooks_to_delete)
@@ -118,3 +118,28 @@ print('All notebooks have been successfully deployed')
 
 for notebook in notebooks_to_delete:
     
+    delete_notebook_params = {
+        "path": f"/Shared/{notebook}",
+        "recursive": "true"
+    }
+
+    # Delete the notebook 
+    delete_notebook_response = requests.post(
+        WORKSPACE_URL + DELETE_WORKSPACE_OBJECT_ENDPOINT, data=json.dumps(delete_notebook_params), headers=HEADERS)
+    
+
+    # Validate the notebook successfully deleted
+    if int(delete_notebook_response.status_code) != 200:
+        print(delete_notebook_response.content)
+        raise ValueError('FAILED - Unable to delete Notebook ')
+    
+    print(f'{notebook} Deletion Completed Successfully')
+
+
+
+
+
+
+
+
+
