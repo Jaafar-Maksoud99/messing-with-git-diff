@@ -1,2 +1,2 @@
-file_list=$(git diff --name-status HEAD~1 HEAD | awk '(/\.py$/) { print $1 , "\"" $2 "\"" , $3 }')
+file_list=$(git diff --name-status HEAD~1 HEAD)
 echo "$file_list"
